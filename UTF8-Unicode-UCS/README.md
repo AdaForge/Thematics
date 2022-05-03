@@ -40,7 +40,7 @@ The most notable ones are present in:
 
 ## What we have
 
-### Ada language design
+### Ada language definitions
 
 * 3 characters sizes: 8, 16, 32 bits corresponding to  Latin-1, UTF-16, UTF-32
 * 3 fixed Strings (array) of these 3 characters types
@@ -59,7 +59,8 @@ offers `Convert`, `Encode`, `Decode` functions with UTF_String / TF_8_String / U
 * **String literals** (with graphemes outside the Latin-1 character set) are UTF-32 encoded in Wide_Wide_String
 * **Identifiers** *may* be UTF-32 encoded, albeit GNAT compiler recognizes the Latin-1 character set in source program identifiers
 
-### Specific GNAT extentions
+### [Specific GNAT extensions](https://gcc.gnu.org/onlinedocs/gcc-11.3.0/gnat_rm/Pragma-Wide_005fCharacter_005fEncoding.html#Pragma-Wide_005fCharacter_005fEncoding "pragma Wide_Character_Encoding")
+
   * `pragma Wide_Character_Encoding (...);`
     * for CHARACTER_LITERAL, use one of `h`, `u`, `s`, `e`, `8`, or `b`
       * `h` Hex encoding
@@ -70,11 +71,12 @@ offers `Convert`, `Encode`, `Decode` functions with UTF_String / TF_8_String / U
       * `b` Brackets encoding only (default value)
     * for IDENTIFIERs, use one of `HEX`, `UPPER`, `SHIFT_JIS`, `EUC`, `UTF8`, or `BRACKETS`.
 
-### At the GNAT compiler level
-* for CHARACTER_LITERAL
+### At the [GNAT compiler](https://gcc.gnu.org/onlinedocs/gcc-11.3.0/gnat_ugn/Alphabetical-List-of-All-Switches.html#Alphabetical-List-of-All-Switches "switches") level
+
+* switch for CHARACTER_LITERALs
   * `-gnatW` postfixed with one of `h`, `u`, `s`, `e`, `8`, or `b` Specifies the method of encoding for wide characters
-* for IDENTIFIERs
-  * `-gnati` postfixed with one of `1` `2` `3` `4` `8` `9` `p` `f` `n` `w`
+* switch for IDENTIFIERs
+  * `-gnati` postfixed with one of `1` `2` `3` `4` `5` `8` `9` `p` `f` `n` `w`
     * i.e Latin-[1,2,3,4,5,9=15] , `p`=IBMPC 437, `8`=IBMPC 850
     * `f`=Full upper-half allowed
     * `h`=No upper-half allowed
@@ -83,9 +85,12 @@ offers `Convert`, `Encode`, `Decode` functions with UTF_String / TF_8_String / U
   * You may associate the Unit-name to a specific file-name
     * through a specific GNAT pragma
       * `pragma Source_File_Name`
-    * through a GPRbuild definition 
-      * `for Spec ("monUnité") use "myUnit.ads";`
-      * `for Body ("momUnité") use "myUnit.adb";`
+    * through a [GPRbuild definition](https://docs.adacore.com/live/wave/gprbuild/html/gprbuild_ug/gprbuild_ug/gnat_project_manager.html#naming-schemes) 
+```Ada
+package Naming is     
+   for Spec ("monUnité") use "myUnit.ads";
+   for Body ("momUnité") use "myUnit.adb";
+```
 
 ## The needs
 
