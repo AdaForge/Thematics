@@ -6,8 +6,7 @@ All about «Strings» for I/O - input and output - with the *real* world.
 
 Inspired by the conversations on the subject started 2021-04-18 on Usenet [comp.lang.ada)(https://groups.google.com/g/comp.lang.ada "Ada and Unicode")
 
---- 
-
+---
 
 ## Definitions
 
@@ -22,17 +21,18 @@ It is NOT the plain Ada type ’String’ encoded as array (<>) of Latin_1.Chara
 * How are texts or Web pages in the Asian languages encoded ?
   * Dual direction (as in Sankrit)
 * How are texts or Web pages in the Arabic languages encoded ?
-  *  Right to left direction, Dual direction
+  * Right to left direction, Dual direction
 
 There are a lot of (Open Source) libraries aiming to manipulate «Strings» with different representations and coding shemes.
 
 The most notable ones are present in:
 
+* Ada Standard Libraries
 * GNAT standard libraries extensions
-* AdaCore VSS
+* DAK_simple_components
 * MATRESHKA
-* GNOGA
 * UXString
+* VSS
 * ...
 
 ## The needs
@@ -41,30 +41,29 @@ The most notable ones are present in:
 * support of [Emoji](https://en.wikipedia.org/wiki/Emoji#Unicode_blocks)
 * File I/O with UTF8 text files
 * Console I/O with UTF8 (BSD, Linux),
-* Windows Console I/O with Win-latin1 , ... 
+* Windows Console I/O with Win-latin1, ...
 * Filesystems names of files, directories
   * Apple HFS+, APFS  (UTF-8 FormD)
   * Microsoft NTFS
   * OpenZFS
   * Linux and BSD FS
-  * 
   * Embedded systems ?
 * Converting a file (ex: from latin-1/8bits to latin2/UTF-8)
->--The following steps are involved: (from Vadim Godunko)
->--     Latin1 string  (contains bytes associated with code points in Latin1)
->--       |    "use Unicode.CES.Basic_8bit.To_Utf32"
->--       v
->--     Utf32 latin1 string (contains code points in Latin1)
->--       |    "Convert argument to To_Utf32 should be
->--       v         Unicode.CCS.Iso_8859_1.Convert"
->--     Utf32 Unicode string (contains code points in Unicode)
->--       |    "use Unicode.CES.Utf8.From_Utf32"
->--       v
->--     Utf8 Unicode string (contains code points in Unicode)
->--       |    "Convert argument to From_Utf32 should be
->--       v         Unicode.CCS.Iso_8859_2.Convert"
->--     Utf8 Latin2 string (contains code points in Latin2)
 
+> --The following steps are involved: (from Vadim Godunko)
+> --     Latin1 string  (contains bytes associated with code points in Latin1)
+> --       |    "use Unicode.CES.Basic_8bit.To_Utf32"
+> --       v
+> --     Utf32 latin1 string (contains code points in Latin1)
+> --       |    "Convert argument to To_Utf32 should be
+> --       v         Unicode.CCS.Iso_8859_1.Convert"
+> --     Utf32 Unicode string (contains code points in Unicode)
+> --       |    "use Unicode.CES.Utf8.From_Utf32"
+> --       v
+> --     Utf8 Unicode string (contains code points in Unicode)
+> --       |    "Convert argument to From_Utf32 should be
+> --       v         Unicode.CCS.Iso_8859_2.Convert"
+> --     Utf8 Latin2 string (contains code points in Latin2)
 
 ## Questions
 
@@ -86,33 +85,32 @@ The most notable ones are present in:
 
 ### Vocabulary
 
-
 * [Grapheme](https://en.wikipedia.org/wiki/Grapheme) : smallest functional unit of a writing system. A specific shape that represents any particular grapheme in a specific typeface is called a *glyph*
 * [Glyph](https://en.wikipedia.org/wiki/Glyph) : graphical representation of a *Grapheme* (Cf. Type face)
 * [Code Points](https://en.wikipedia.org/wiki/Code_point) : Code points usually represent a single grapheme; ranges from 0 to 0x10FFFF
 * Unicode scalars: same as code points except the 2,048 surrogate code points in the range 0xD800 to 0xDFFF (used by the UTF-16 encoding to represent code points greater than 65,535)
 * extended grapheme cluster: consists of one or more Unicode scalars.
- * Naming of characters
- * [Character Foldings](http://www.unicode.org/L2/L2000/00261-tr25-0d1.html) : Accent folding, Case folding, Final forms folding, Kana folding, Width folding
- * UCS Sequence Identifiers
- * Subsets
- * [UCS encoding forms](https://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings): UTF-8 , UTF-16 , UTF-32 (UCS-4)
- * UCS Encoding schemes: UTF-8, UTF-16BE, UTF-16LE, UTF-16, UTF-32BE, UTF-32LE, UTF-32
- * Combining characters
- * Normalization forms: 'D', 'C', 'KD', 'KC' 
- *  'D' :: Decomposition in 2 or more Code Points
- *  'C' :: Composite characters (in 1 representation Code Points + possible marks)
- *  'K' :: K as Compatibility
+  * Naming of characters
+  * [Character Foldings](http://www.unicode.org/L2/L2000/00261-tr25-0d1.html) : Accent folding, Case folding, Final forms folding, Kana folding, Width folding
+  * UCS Sequence Identifiers
+  * Subsets
+  * [UCS encoding forms](https://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings): UTF-8 , UTF-16 , UTF-32 (UCS-4)
+* UCS Encoding schemes: UTF-8, UTF-16BE, UTF-16LE, UTF-16, UTF-32BE, UTF-32LE, UTF-32
+* Combining characters
+* Normalization forms: 'D', 'C', 'KD', 'KC' 
+* 'D' :: Decomposition in 2 or more Code Points
+* 'C' :: Composite characters (in 1 representation Code Points + possible marks)
+* 'K' :: K as Compatibility
 
 Note (source [Wikipedia](https://en.wikipedia.org/wiki/Universal_Coded_Character_Set#Differences_from_Unicode) )
 Some applications support ISO 10646 characters but do not fully support Unicode. One such application, Xterm, can properly display all ISO 10646 characters that have a one-to-one character-to-glyph mapping[clarification needed] and a single directionality. It can handle some combining marks by simple overstriking methods, but cannot display Hebrew (bidirectional), Devanagari (one character to many glyphs) or Arabic (both features).
 
 ISO/IEC 10646:2017 = Unicode 10.0
 
- * Windows and Java are mostly UTF-16 systems
- * XML : UTF-8
- * HTTP headers : ASCII or [ISO-8859-1 Latin-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)
- * Other systems: 8 bits ASCII or [ISO-8859-1 Latin-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)
+* Windows and Java are mostly UTF-16 systems
+* XML : UTF-8
+* HTTP headers : ASCII or [ISO-8859-1 Latin-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)
+* Other systems: 8 bits ASCII or [ISO-8859-1 Latin-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)
 
 ### Ada 2022 Language Reference
 
@@ -122,7 +120,8 @@ ISO/IEC 10646:2017 = Unicode 10.0
 
 The character repertoire for the text of an Ada program consists of the entire coding space described by the [ISO/IEC 10646:2017 Universal Coded Character Set](https://en.wikipedia.org/wiki/Universal_Coded_Character_Set). This coding space is organized in planes, each plane comprising 65536 characters.
 (...)
-** An Ada implementation shall accept Ada source code in UTF-8 encoding**, with or without a BOM
+
+**An Ada implementation shall accept Ada source code in UTF-8 encoding**, with or without a BOM
 
 #### RM§ 2.3 Identifiers
 
@@ -148,10 +147,11 @@ There are three predefined string types, **String**, **Wide_String**, and **Wide
 ```Ada
 package Ada.Characters.Conversions
 ```
->    (Character, Wide_Character, Wide_Wide_Character)<br>
->    (String, Wide_String, Wide_Wide_String)<br>
 
-A.4 String Handling
+> (Character, Wide_Character, Wide_Wide_Character)<br>
+> (String, Wide_String, Wide_Wide_String)<br>
+
+#### RM§ A.4 String Handling
 
 ```Ada
 package Ada.Strings
@@ -161,16 +161,17 @@ package Ada.Strings.Bounded
 package Ada.Strings.Unbounded
 package Ada.Strings.Maps.Constants
 ```
+
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
+#### RM§ A.4.9 String Hashing
 
-A.4.9 String Hashing
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
 A.4.10 String Comparison
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
-A.4.11 String Encoding
+#### RM§ A.4.11 String Encoding
 
  ```Ada
 subtype UTF_String is String;
@@ -181,31 +182,37 @@ subtype UTF_16_Wide_String is Wide_String;
  ```Ada
 package Ada.Strings.UTF_Encoding
 ```
->    UTF_String / UTF_8_String / UTF_16_Wide_String
+
+> UTF_String / UTF_8_String / UTF_16_Wide_String
 
 ```Ada
 package Ada.Strings.UTF_Encoding.Conversions
 ```
->    UTF_String  <-> UTF_8_String <-> UTF_16_Wide_String
+
+> UTF_String  <-> UTF_8_String <-> UTF_16_Wide_String
 
 ```Ada
 package Ada.Strings.UTF_Encoding.Strings
 ```
->    Encode/Decode <-> UTF_String / UTF_8_String / UTF_16_Wide_String
+
+> Encode/Decode <-> UTF_String / UTF_8_String / UTF_16_Wide_String
 
 ```Ada
 package Ada.Strings.UTF_Encoding.Wide_Strings
 ```
->    Encode/Decode <-> UTF_String / UTF_8_String / UTF_16_Wide_String
+
+> Encode/Decode <-> UTF_String / UTF_8_String / UTF_16_Wide_String
 
 ```Ada
 package Ada.Strings.UTF_Encoding.Wide_Wide_Strings
 ```
->    Encode/Decode <-> UTF_String / UTF_8_String / UTF_16_Wide_String
+
+> Encode/Decode <-> UTF_String / UTF_8_String / UTF_16_Wide_String
 
 ```Ada
 package Ada.Strings.Text_Buffers
 ```
+
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
 ```Ada
@@ -223,7 +230,6 @@ package Ada.Strings.Wide_Wide_Unbounded.Wide_Wide_Text_IO is
    procedure Put (U : Unbounded_Wide_Wide_String);
    procedure Put_Line (U    : Unbounded_Wide_Wide_String);
 ```
-
 
 ### GNAT/GCC specific implementation
 
@@ -253,23 +259,26 @@ WC_Encoding_Letters : constant array (WC_Encoding_Method) of Character :=
 ```Ada
 package Ada.Strings.Unbounded.Text_IO
 ```
+
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
  ```Ada
 function Get_Line (File : File_Type) return Unbounded_String
 ```
+
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
 ```Ada
 procedure Put (File : File_Type; U : Unbounded_String)
 ```
+
 > all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
  ```Ada
 procedure Put_Line (File : File_Type; U : Unbounded_String)
 ```
-> all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
+> all with `String`, `Wide_String`, `Wide_Wide_String` variants
 
 ### GNAT/GCC Additional Libraries
 
