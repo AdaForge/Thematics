@@ -6,9 +6,11 @@ All about «Strings» for I/O - input and output - with the *real* world.
 
 Inspired by the conversations on the subject started 2021-04-18 on Usenet [comp.lang.ada)(https://groups.google.com/g/comp.lang.ada "Ada and Unicode")
 
+See also [UTF-8 on Windows with Ada](https://stackoverflow.com/questions/48829940/utf-8-on-windows-with-ada "Stack Overflow")
+
 ---
 
-## Definitions
+## Some Definitions
 
 «Strings» refer here as a user readable representation of text.
 
@@ -33,7 +35,57 @@ The most notable ones are present in:
 * MATRESHKA
 * UXString
 * VSS
+* XMLada
 * ...
+
+## What we have
+
+### Ada language design
+
+* 3 characters sizes: 8, 16, 32 bits corresponding to  Latin-1, UTF-16, UTF-32
+* 3 fixed Strings (array) of these 3 characters types
+* 3 variable length Strings (Bounded) of these 3 characters types
+  * with conversion functions
+* 3 unlimited variable length Strings (Unbounded) of these 3 characters types
+  * with conversion functions
+  
+`package Ada.Strings.UTF_Encoding`<br>
+defines `UTF_String` / `TF_8_String` / `UTF_16_Wide_String` and Encoding_Schemes (`UTF_8`, `UTF_16BE`, `UTF_16LE`)
+
+`package Ada.Strings.UTF_Encoding.*Strings`<br>
+offers `Convert`, `Encode`, `Decode` functions with UTF_String / TF_8_String / UTF_16_Wide_String and Encoding_Scheme (UTF_8, UTF_16BE, UTF_16LE)
+
+* **Source code** is treated (read) as UTF-8 (as standard)  
+* **String literals** (with graphemes outside the Latin-1 character set) are UTF-32 encoded in Wide_Wide_String
+* **Identifiers** *may* be UTF-32 encoded, albeit GNAT compiler recognizes the Latin-1 character set in source program identifiers
+
+### Specific GNAT extentions
+  * `pragma Wide_Character_Encoding (...);`
+    * for CHARACTER_LITERAL, use one of `h`, `u`, `s`, `e`, `8`, or `b`
+      * `h` Hex encoding
+      * `u` Upper half encoding
+      * `s` Shift/JIS encoding
+      * `e` EUC encoding
+      * `8` UTF-8 encoding
+      * `b` Brackets encoding only (default value)
+    * for IDENTIFIERs, use one of `HEX`, `UPPER`, `SHIFT_JIS`, `EUC`, `UTF8`, or `BRACKETS`.
+
+### At the GNAT compiler level
+* for CHARACTER_LITERAL
+  * `-gnatW` postfixed with one of `h`, `u`, `s`, `e`, `8`, or `b` Specifies the method of encoding for wide characters
+* for IDENTIFIERs
+  * `-gnati` postfixed with one of `1` `2` `3` `4` `8` `9` `p` `f` `n` `w`
+    * i.e Latin-[1,2,3,4,5,9=15] , `p`=IBMPC 437, `8`=IBMPC 850
+    * `f`=Full upper-half allowed
+    * `h`=No upper-half allowed
+    * `w`=Wide-character codes 
+* Unit names are best limited to ASCII character as they must correspond to the name of the file (FileSystem constraints)
+  * You may associate the Unit-name to a specific file-name
+    * through a specific GNAT pragma
+      * `pragma Source_File_Name`
+    * through a GPRbuild definition 
+      * `for Spec ("monUnité") use "myUnit.ads";`
+      * `for Body ("momUnité") use "myUnit.adb";`
 
 ## The needs
 
