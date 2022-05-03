@@ -51,7 +51,7 @@ package Ada.Strings.UTF_Encoding.*Strings
 
 ```
 
-# GNAT standard libraries extensions © Free Software Foundation, Inc./LGPL3
+# GNAT standard libraries extensions © Free Software Foundation, Inc. /LGPL v3
 
 ```Ada
 package Ada.Wide_Wide_Characters.Unicode is
@@ -97,7 +97,7 @@ package GNAT.Directory_Operations is
 
 
 
-# DAK_simple_components © Dmitry A. Kazakov /LGPL2
+# DAK_SIMPLE_COMPONENTS © Dmitry A. Kazakov /LGPL v2
 
 > aicwl -- Ada Industrial Control Widgets Library<br>
 > max_home_automation<br>
@@ -247,10 +247,72 @@ package UXStrings is
       return UXString;
 ```
 
+# VSS © AdaCore, inc /LGPL v3
+
+```Ada
+package VSS.Implementation.Strings is
+   type String_Data (In_Place : Boolean := False) is record
+      Capacity : Character_Count := 0;
+
+      Padding  : Boolean := False;
+      --  This padding bit is not used in the code, but here for the benefit
+      --  of dynamic memory analysis tools such as valgrind.
+
+      case In_Place is
+         when True =>
+            Storage : System.Storage_Elements.Storage_Array (0 .. 19);
+
+         when False =>
+            Handler : String_Handler_Access;
+            Pointer : System.Address;
+      end case;
+   end record;
+   for String_Data use record
+      Storage  at 0  range  0 .. 159;
+      Handler  at 0  range  0 ..  63;
+      Pointer  at 8  range  0 ..  63;
+      Capacity at 20 range  0 ..  29;
+      Padding  at 20 range 30 ..  30;
+      In_Place at 20 range 31 ..  31;
+   end record;
+
+package VSS.Implementation.Referrers is
+   type Magic_String_Base is
+     abstract new Ada.Finalization.Controlled with record
+      Limited_Head : Referal_Limited_Access;
+      Limited_Tail : Referal_Limited_Access;
+      Head         : Referal_Access;
+      Tail         : Referal_Access;
+   end record;
+
+
+package VSS.Strings is
+   type Virtual_String is
+      new VSS.Implementation.Referrers.Magic_String_Base with record
+          Data : aliased VSS.Implementation.Strings.String_Data;
+   end record
+      with String_Literal => To_Virtual_String;
+      with Read  => Read,
+           Write => Write;
+   
+   function To_Virtual_String
+     (Item : Wide_Wide_String) 
+      return Virtual_String;
+
+   procedure Read
+     (Stream : not null access Ada.Streams.Root_Stream_Type'Class;
+      Self   : out Virtual_String);
+   procedure Write
+     (Stream : not null access Ada.Streams.Root_Stream_Type'Class;
+      Self   : Virtual_String);
+
+
+
+```
+
 # XMLada © ACT-Europe /LGPL2 
 
 > gwindows/gnavi<br>
-> VSS<br>
 
 ```Ada
 package Unicode is
