@@ -3,7 +3,8 @@
 * DAK_simple_components © Dmitry A. Kazakov /LGPL2
 * MATRESHKA © Vadim Godunko /≈MIT
 * UXString  © Pascal Pignard /CeCILL V2.1
-* XMLada © ACT-Europe /LGPL2 
+* VSS © Vadim Godunko @AdaCore, inc /LGPL v3
+* XMLada © Emmanuel Briot @ACT-Europe /LGPL2 
 
 # Ada Language and Standard Libraries
 
@@ -247,7 +248,7 @@ package UXStrings is
       return UXString;
 ```
 
-# VSS © AdaCore, inc /LGPL v3
+# VSS © Vadim Godunko @AdaCore, inc /LGPL v3
 
 ```Ada
 package VSS.Implementation.Strings is
@@ -310,9 +311,9 @@ package VSS.Strings is
 
 ```
 
-# XMLada © ACT-Europe /LGPL2 
+# XMLada © Emmanuel Briot @ACT-Europe /LGPL2 
 
-> gwindows/gnavi<br>
+> gwindows/gnavi project<br>
 
 ```Ada
 package Unicode is

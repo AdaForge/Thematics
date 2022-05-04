@@ -4,7 +4,7 @@ All about «Strings» for I/O - input and output - with the *real* world.
 
 ---
 
-Inspired by the conversations on the subject started 2021-04-18 on Usenet [comp.lang.ada)(https://groups.google.com/g/comp.lang.ada "Ada and Unicode")
+Inspired by the conversations on the subject started 2021-04-18 on Usenet [comp.lang.ada](https://groups.google.com/g/comp.lang.ada "Ada and Unicode")
 
 See also [UTF-8 on Windows with Ada](https://stackoverflow.com/questions/48829940/utf-8-on-windows-with-ada "Stack Overflow")
 
@@ -29,13 +29,13 @@ There are a lot of (Open Source) libraries aiming to manipulate «Strings» with
 
 The most notable ones are present in:
 
-* Ada Standard Libraries
-* GNAT standard libraries extensions
-* DAK_simple_components
-* MATRESHKA
-* UXString
-* VSS
-* XMLada
+* [Ada Standard Libraries](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+* [GNAT standard libraries extensions](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+* [DAK_simple_components](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+* [MATRESHKA](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+* [UXString](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+* [VSS](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+* [XMLada](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
 * ...
 
 ## What we have
