@@ -4,7 +4,7 @@
 * MATRESHKA © Vadim Godunko /≈MIT
 * UXString  © Pascal Pignard /CeCILL V2.1
 * VSS © Vadim Godunko @AdaCore, inc /LGPL v3
-* XMLada © Emmanuel Briot @ACT-Europe /LGPL2 
+* XMLada © Emmanuel Briot, Nicolas Boulenguez @ACT-Europe /LGPL2 
 
 # Ada Language and Standard Libraries
 
@@ -96,16 +96,10 @@ package GNAT.Directory_Operations is
    subtype Dir_Name_Str is String;
 ```
 
-
-
 # DAK_SIMPLE_COMPONENTS © Dmitry A. Kazakov /LGPL v2
 
 > aicwl -- Ada Industrial Control Widgets Library<br>
 > max_home_automation<br>
-> GNOGA<br>
-> Ada_GUI<br>
-
-
 
 ```Ada
 package Strings_Edit.UTF8 is
@@ -211,6 +205,7 @@ package Matreshka.Internals.Strings is
 ```
 
 # UXString  © Pascal Pignard /CeCILL V2.1
+> GNOGA project<br>
 
 ```Ada
 package UXStrings is
@@ -311,7 +306,7 @@ package VSS.Strings is
 
 ```
 
-# XMLada © Emmanuel Briot @ACT-Europe /LGPL2 
+# XMLada © Emmanuel Briot, Nicolas Boulenguez @ACT-Europe /LGPL2 
 
 > gwindows/gnavi project<br>
 

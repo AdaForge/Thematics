@@ -6,6 +6,7 @@ All about «Strings» for I/O - input and output - with the *real* world.
 
 Inspired by the conversations on the subject started 2021-04-18 on Usenet [comp.lang.ada](https://groups.google.com/g/comp.lang.ada "Ada and Unicode")
 
+
 See also [UTF-8 on Windows with Ada](https://stackoverflow.com/questions/48829940/utf-8-on-windows-with-ada "Stack Overflow")
 
 ---
@@ -36,6 +37,7 @@ The most notable ones are present in:
 * [UXString](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
 * [VSS](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
 * [XMLada](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
+  * [Documentation](https://docs.adacore.com/xmlada-docs/unicode.html "The Unicode module")
 * ...
 
 ## What we have
@@ -95,10 +97,10 @@ package Naming is
 ## The needs
 
 * Unicode Litterals in our Ada source files
-* support of [Emoji](https://en.wikipedia.org/wiki/Emoji#Unicode_blocks)
-* File I/O with UTF8 text files
-* Console I/O with UTF8 (BSD, Linux),
-* Windows Console I/O with Win-latin1, ...
+* support of [Emoji](https://en.wikipedia.org/wiki/Emoji#Unicode_blocks)’s
+* File I/O with UTF-8 text files
+* BSD, Linux Console I/O with UTF-8
+* Windows Console I/O with UTF-16 and Win-Latin-x, ...
 * Filesystems names of files, directories
   * Apple HFS+, APFS  (UTF-8 FormD)
   * Microsoft NTFS
@@ -107,6 +109,31 @@ package Naming is
   * Embedded systems ?
 * Converting a file (ex: from latin-1/8bits to latin2/UTF-8)
 
+| Usage / Lib | Ada | GNAT | XML | VSS | MATRESHKA | simple_component | UXString | |
+| :---- |   :---: |   :---: |   :---: |   :---: |   :---: |   :---: |   :---: | |
+| Stored as UTF-8 |  |  |  |  |  |  |  | |
+| Grapheme |  |  |  |  |  |  |  | |
+| Codepoint |  |  |  |  |  |  |  | |
+| UCS Properties |  |  |  |  |  |  |  | |
+| UCS Character Foldings |  |  |  |  |  |  |  | |
+| UCS Case mapping |  |  |  |  |  |  |  | |
+| UCS Bloc definitions |  |  |  |  |  |  |  | |
+| UCS Line Break |  |  |  |  |  |  |  | |
+| Grapheme iterator based on GraphemeBreak |  |  |  |  |  |  |  | |
+| Basic String functions |  |  |  |  |  |  |  | |
+| '=, substring, search, substitution |  |  |  |  |  |  |  | |
+| To_String, From_String |  |  |  |  |  |  |  | |
+| Advanced Strings sorting (Locale collation) |  |  |  |  |  |  |  | |
+| Normalization |  |  |  |  |  |  |  | |
+| UCS encoding form |  |  |  |  |  |  |  | |
+| Encode / Decode UTF-16 LE/BE, UTF-32 |  |  |  |  |  |  |  | |
+| Streams |  |  |  |  |  |  |  | |
+| Text_IO |  |  |  |  |  |  |  | |
+| Equiv. Bounded String |  |  |  |  |  |  |  | |
+| Short string storage optimization |  |  |  |  |  |  |  | |
+
+
+### Text file Import / Export scenario
 > --The following steps are involved: (from Vadim Godunko)
 > --     Latin1 string  (contains bytes associated with code points in Latin1)
 > --       |    "use Unicode.CES.Basic_8bit.To_Utf32"
