@@ -17,6 +17,7 @@ See also [UTF-8 on Windows with Ada](https://stackoverflow.com/questions/4882994
 
 It is NOT the plain Ada type ’String’ encoded as array (<>) of Latin_1.Character
 
+
 ## Context
 
 * Most (99%) of our plain text files are UTF-8 encoded
@@ -39,6 +40,13 @@ The most notable ones are present in:
 * [XMLada](https://github.com/AdaForge/Thematics/blob/main/UTF8-Unicode-UCS/Lib_Analysis.md)
   * [Documentation](https://docs.adacore.com/xmlada-docs/unicode.html "The Unicode module")
 * ...
+
+## Back to the basics
+
+[UNICODE home page](https://home.unicode.org)
+[Unicode® Technical Site](https://unicode.org/main.html)
+[Unicode Basics](https://github.com/unicode-org/icu/blob/main/docs/userguide/icu/unicode.md)
+
 
 ## What we have
 
@@ -161,11 +169,6 @@ package Naming is
 
 * [Swift](https://developer.apple.com/documentation/swift/string "Apple Developer Documentation")
  ** see [Topics](https://developer.apple.com/documentation/swift/string#topics) for the conversion functions
-
-## Back to the basics
-
-[UNICODE home page](https://home.unicode.org)
-[Unicode® Technical Site](https://unicode.org/main.html)
 
 ### Vocabulary
 
