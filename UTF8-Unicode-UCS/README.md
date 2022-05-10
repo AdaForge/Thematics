@@ -169,6 +169,10 @@ package Naming is
 
 * [Swift](https://developer.apple.com/documentation/swift/string "Apple Developer Documentation")
  ** see [Topics](https://developer.apple.com/documentation/swift/string#topics) for the conversion functions
+ 
+### Unicode ICU libraries
+
+* ICU4X [String representation on the library API boundary](https://github.com/unicode-org/icu4x/blob/main/docs/design/string_representation.md) (Rust vision)
 
 ### Vocabulary
 
