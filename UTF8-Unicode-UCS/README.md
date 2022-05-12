@@ -47,6 +47,9 @@ The most notable ones are present in:
 [Unicode® Technical Site](https://unicode.org/main.html)
 [Unicode Basics](https://github.com/unicode-org/icu/blob/main/docs/userguide/icu/unicode.md)
 
+#### Some interesting discussions and complements
+
+* [What's the difference between a character, a code point, a glyph and a grapheme?](https://stackoverflow.com/questions/27331819/whats-the-difference-between-a-character-a-code-point-a-glyph-and-a-grapheme "StackOverflow")
 
 ## What we have
 
